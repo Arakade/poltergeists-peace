@@ -1,0 +1,3 @@
+[submodule "tcg.hackspace.unity-git"]
+	path = tcg.hackspace.unity-git
+	url = https://bitbucket.org/TeaClipper/tcg.hackspace.unity-git
