@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -14,16 +14,44 @@ namespace ghostly {
 
 		[SerializeField]
 		private Rigidbody2D rb = null!;
+		
+		[SerializeField]
+		private Turn turn = new Turn();
+		
+		[Serializable]
+		private class Turn {
+			public float smoothTime = 1f;
+			public float maxSpeed = 30f;
+
+			private float yAngle;
+			private float rate = 10f;
+			
+			public void setAngle(float value) => yAngle = value;
+			
+			public Quaternion turnTo(float angleDeg) {
+				yAngle = Mathf.SmoothDampAngle(yAngle, angleDeg, ref rate, smoothTime, maxSpeed, Time.deltaTime);
+				return Quaternion.Euler(0f, 0f, yAngle);
+			}
+		}
 
 #endregion serialized
 #region Unity callbacks
 
-		public void FixedUpdate() {
-			move = input * (Time.deltaTime * speed);
+		public void OnEnable() {
+			xfrm = transform;
+			turn.setAngle(xfrm.eulerAngles.y);
 		}
 
+		// public void FixedUpdate() {
+		// }
+
 		public void Update() {
+			move = input * (Time.deltaTime * speed);
 			rb.velocity = move;
+			if (0f != input.x || 0f != input.y) {
+				var angleDeg = Mathf.Atan2(-input.x, input.y) * Mathf.Rad2Deg;
+				xfrm.rotation = turn.turnTo(angleDeg);
+			}
 		}
 		
 #if UNITY_EDITOR
@@ -41,7 +69,9 @@ namespace ghostly {
 #region internal
 
 		internal void setInput(float x, float y) {
-			input = new Vector2(x, y);
+			var v = new Vector2(x, y);
+			var sqrLen = v.sqrMagnitude;
+			input = sqrLen > 1f ? v / Mathf.Sqrt(sqrLen) : v;
 		}
 
 		internal void setHorizontal(float value) {
@@ -58,6 +88,8 @@ namespace ghostly {
 		private Vector2 move;
 
 		private Vector2 input;
+		
+		private Transform xfrm = null!;
 
 #endregion private
 	}
