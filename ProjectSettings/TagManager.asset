@@ -38,6 +38,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Floor
+    uniqueID: 2966094955
+    locked: 0
+  - name: Static
+    uniqueID: 1168444111
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Mobiles
+    uniqueID: 745623435
+    locked: 0
+  - name: Player
+    uniqueID: 1480195969
     locked: 0
