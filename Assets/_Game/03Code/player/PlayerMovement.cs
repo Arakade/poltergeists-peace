@@ -42,7 +42,7 @@ namespace ghostly {
 			turn.setAngle(xfrm.eulerAngles.y);
 		}
 
-		public void Update() {
+		public void FixedUpdate() {
 			move = input * speed;
 			rb.velocity = move;
 			if (0f != input.x || 0f != input.y) {
