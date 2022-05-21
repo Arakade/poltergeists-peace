@@ -32,7 +32,7 @@ namespace ghostly {
 		}
 		
 #if UNITY_EDITOR
-		public void OnDrawGizmos() {
+		public void OnDrawGizmosSelected() {
 			Handles.BeginGUI();
 			Handles.Label(transform.position, $"{nameof(input)}:{input}\n{nameof(move)}:{move}");
 			Handles.EndGUI();
@@ -49,14 +49,6 @@ namespace ghostly {
 			var v = new Vector2(x, y);
 			var sqrLen = v.sqrMagnitude;
 			input = sqrLen > 1f ? v / Mathf.Sqrt(sqrLen) : v;
-		}
-
-		internal void setHorizontal(float value) {
-			input.x = value;
-		}
-
-		internal void setVertical(float value) {
-			input.y = value;
 		}
 
 #endregion internal

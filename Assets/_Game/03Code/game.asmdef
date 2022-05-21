@@ -3,6 +3,7 @@
     "rootNamespace": "ghostly",
     "references": [
         "Unity.InputSystem",
+        "Unity.TextMeshPro",
         "NavMeshComponents"
     ],
     "includePlatforms": [],

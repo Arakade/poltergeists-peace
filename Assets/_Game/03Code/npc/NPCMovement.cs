@@ -1,9 +1,11 @@
-﻿
-#nullable enable
-using ghostly.utils;
+﻿using ghostly.utils;
 using UnityEngine;
 using UnityEngine.AI;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
+#nullable enable
 namespace ghostly.npc {
 	public sealed class NPCMovement : MonoBehaviour {
 #region serialized
@@ -22,13 +24,24 @@ namespace ghostly.npc {
 		}
 
 		public void Start() {
-			if (null == wayPoints || 0 >= wayPoints.Length) {
+			if (ReferenceEquals(null, wayPoints) || 0 >= wayPoints.Length) {
 				this.log($"No waypoints for {this}");
 				return;
 			}
 				
 			selectNewDestination();
 		}
+		
+#if UNITY_EDITOR
+		public void OnDrawGizmosSelected() {
+			if (!Application.isPlaying)
+				return;
+			
+			Handles.BeginGUI();
+			Handles.Label(transform.position, $"hasPath:{agent.hasPath}\ndist:{agent.remainingDistance}\nstopped:{agent.isStopped}");
+			Handles.EndGUI();
+		}
+#endif
 
 #endregion Unity callbacks
 #region public
@@ -69,7 +82,7 @@ namespace ghostly.npc {
 			return pos;
 		}
 
-		private WayPoint[]? wayPoints;
+		private WayPoint[] wayPoints = null!;
 
 #endregion private
 	}
