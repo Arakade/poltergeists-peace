@@ -46,7 +46,7 @@ namespace ghostly {
 		// }
 
 		public void Update() {
-			move = input * (Time.deltaTime * speed);
+			move = input * speed;
 			rb.velocity = move;
 			if (0f != input.x || 0f != input.y) {
 				var angleDeg = Mathf.Atan2(-input.x, input.y) * Mathf.Rad2Deg;
