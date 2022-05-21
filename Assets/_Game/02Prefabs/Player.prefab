@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 1987369363984752060}
   - component: {fileID: 1987369363984752048}
   - component: {fileID: 1987369363984752049}
+  - component: {fileID: 7009321895860989645}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -351,9 +352,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   rb: {fileID: 1987369363984752060}
-  turn:
-    smoothTime: 0.1
-    maxSpeed: 1000
+  turn2d: {fileID: 7009321895860989645}
+--- !u!114 &7009321895860989645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1987369363984752061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bade7b9a71d04f92868304aab6cb7f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smoothTime: 0.1
+  maxSpeed: 1000
 --- !u!1 &1987369363995112561
 GameObject:
   m_ObjectHideFlags: 0

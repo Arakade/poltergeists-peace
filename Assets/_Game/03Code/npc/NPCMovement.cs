@@ -1,5 +1,6 @@
 ﻿
 #nullable enable
+using ghostly.utils;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -22,19 +23,21 @@ namespace ghostly.npc {
 
 		public void Start() {
 			if (null == wayPoints || 0 >= wayPoints.Length) {
-				Debug.LogWarning($"No waypoints for {this}");
+				this.log($"No waypoints for {this}");
 				return;
 			}
 				
-			// var destWP = wayPoints[Random.Range(0, wayPoints.Length)];
-			var destWP = wayPoints[0];
-			var pos = destWP.transform.position;
-			Debug.Log($"{this} going to {destWP} = {pos}");
-			agent.SetDestination(pos);
+			selectNewDestination();
 		}
 
 #endregion Unity callbacks
 #region public
+
+		public void Update() {
+			if (hasArrived()) {
+				selectNewDestination();
+			}
+		}
 
 #endregion public
 #region internal
@@ -42,6 +45,30 @@ namespace ghostly.npc {
 #endregion internal
 #region private
 		
+		private bool hasArrived() {
+			if (agent.pathPending)
+				return false;
+			
+			if (!agent.hasPath) {
+				this.warn($"{this} has no path");
+				return true;
+			}
+			
+			return agent.remainingDistance <= agent.stoppingDistance;
+		}
+
+		private void selectNewDestination() {
+			var pos = getRandomDestination();
+			agent.SetDestination(pos);
+		}
+
+		private Vector3 getRandomDestination() {
+			var destWP = wayPoints[Random.Range(0, wayPoints.Length)];
+			var pos = destWP.transform.position;
+			this.log($"{this} going to {destWP} = {pos}");
+			return pos;
+		}
+
 		private WayPoint[]? wayPoints;
 
 #endregion private

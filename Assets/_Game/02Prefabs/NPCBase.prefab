@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3247277236149358369}
   - component: {fileID: 3247277236149358370}
   - component: {fileID: 3247277236149358381}
+  - component: {fileID: 4105531154181307165}
   m_Layer: 6
   m_Name: NPCBase
   m_TagString: Untagged
@@ -80,9 +81,9 @@ NavMeshAgent:
   m_GameObject: {fileID: 3247277236149358375}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.1
   m_Speed: 4
-  m_Acceleration: 4
+  m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0.5
@@ -105,4 +106,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07152baff17a46b08851deed0730bc3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 3247277236149358370}
+--- !u!114 &4105531154181307165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3247277236149358375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ede3c184b7f4bfc8fae05ac7adfdae2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smoothTime: 0.1
+  maxSpeed: 1000
   agent: {fileID: 3247277236149358370}

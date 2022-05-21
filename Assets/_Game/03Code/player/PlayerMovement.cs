@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -16,39 +15,20 @@ namespace ghostly {
 		private Rigidbody2D rb = null!;
 		
 		[SerializeField]
-		private Turn turn = new Turn();
-		
-		[Serializable]
-		private class Turn {
-			public float smoothTime = 1f;
-			public float maxSpeed = 30f;
-
-			private float yAngle;
-			private float rate = 10f;
-			
-			public void setAngle(float value) => yAngle = value;
-			
-			public Quaternion turnTo(float angleDeg) {
-				yAngle = Mathf.SmoothDampAngle(yAngle, angleDeg, ref rate, smoothTime, maxSpeed, Time.deltaTime);
-				return Quaternion.Euler(0f, 0f, yAngle);
-			}
-		}
+		private Turn2d turn2d = null!;
 
 #endregion serialized
 #region Unity callbacks
 
 		public void OnEnable() {
 			xfrm = transform;
-			turn.setAngle(xfrm.eulerAngles.y);
+			turn2d.setAngle(xfrm.eulerAngles.y);
 		}
 
 		public void FixedUpdate() {
 			move = input * speed;
 			rb.velocity = move;
-			if (0f != input.x || 0f != input.y) {
-				var angleDeg = Mathf.Atan2(-input.x, input.y) * Mathf.Rad2Deg;
-				xfrm.rotation = turn.turnTo(angleDeg);
-			}
+			turn2d.turnToVector(input);
 		}
 		
 #if UNITY_EDITOR
