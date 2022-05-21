@@ -2,7 +2,8 @@
     "name": "game",
     "rootNamespace": "ghostly",
     "references": [
-        "Unity.InputSystem"
+        "Unity.InputSystem",
+        "NavMeshComponents"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
