@@ -16,7 +16,7 @@ namespace ghostly.pathfinding {
 			var children = GetComponentsInChildren<Collider2D>();
 			foreach (var c in children) {
 				// If it already has a NMM, skip
-				if (null != (c.GetComponent<NavMeshModifier>())) {
+				if (c.TryGetComponent(out NavMeshModifier _)) {
 					continue;
 				}
 
