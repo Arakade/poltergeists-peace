@@ -1,4 +1,5 @@
-﻿using ghostly.utils;
+﻿using System;
+using ghostly.utils;
 using UnityEngine;
 using UnityEngine.AI;
 #if UNITY_EDITOR
@@ -12,24 +13,20 @@ namespace ghostly.npc {
 		
 		[SerializeField]
 		private NavMeshAgent agent = null!;
-
+		
 #endregion serialized
 #region Unity callbacks
 
 		public void Awake() {
-			wayPoints = FindObjectsOfType<WayPoint>();
-			
 			agent.updateRotation = false;
 			agent.updateUpAxis = false;
 		}
 
-		public void Start() {
-			if (ReferenceEquals(null, wayPoints) || 0 >= wayPoints.Length) {
-				this.log($"No waypoints for {this}");
-				return;
+		public void Update() {
+			if (hasArrived()) {
+				enabled = false;
+				onArrived?.Invoke();
 			}
-				
-			selectNewDestination();
 		}
 		
 #if UNITY_EDITOR
@@ -45,11 +42,14 @@ namespace ghostly.npc {
 
 #endregion Unity callbacks
 #region public
-
-		public void Update() {
-			if (hasArrived()) {
-				selectNewDestination();
-			}
+		
+		public event Action? onArrived;
+		
+		public float stoppingDistance => agent.stoppingDistance;
+		
+		public void goTo(Vector2 pos) {
+			enabled = true;
+			agent.SetDestination(pos);
 		}
 
 #endregion public
@@ -67,22 +67,8 @@ namespace ghostly.npc {
 				return true;
 			}
 			
-			return agent.remainingDistance <= agent.stoppingDistance;
+			return agent.remainingDistance <= stoppingDistance;
 		}
-
-		private void selectNewDestination() {
-			var pos = getRandomDestination();
-			agent.SetDestination(pos);
-		}
-
-		private Vector3 getRandomDestination() {
-			var destWP = wayPoints[Random.Range(0, wayPoints.Length)];
-			var pos = destWP.transform.position;
-			this.log($"{this} going to {destWP} = {pos}");
-			return pos;
-		}
-
-		private WayPoint[] wayPoints = null!;
 
 #endregion private
 	}

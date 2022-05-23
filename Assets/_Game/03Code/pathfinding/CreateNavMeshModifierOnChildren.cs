@@ -15,6 +15,10 @@ namespace ghostly.pathfinding {
 		private void addObstaclesToChildColliders() {
 			var children = GetComponentsInChildren<Collider2D>();
 			foreach (var c in children) {
+				// dynamic objects aren't obstacles in NavMesh
+				if (!c.TryGetComponent(out Rigidbody2D rb) && rb.bodyType != RigidbodyType2D.Static)
+					continue;
+				
 				// If it already has a NMM, skip
 				if (c.TryGetComponent(out NavMeshModifier _)) {
 					continue;
