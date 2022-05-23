@@ -22,9 +22,6 @@ namespace ghostly.npc.goals {
 			owner.currentDestination = location;
 			owner.stateEngine.onStateChange += onStateChangedWhileWaitingToArrive;
 			owner.stateEngine.changeState(nameof(MoveToOwnerCurrentDestination));
-			
-			
-			// TODO: Wait for a bit
 		}
 
 #endregion public

@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 7430629108165603230}
   - component: {fileID: 7057346615438907801}
   m_Layer: 0
-  m_Name: Room.02
+  m_Name: the kitchen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 7648854649323219096}
   - component: {fileID: 6485719826814102958}
   m_Layer: 0
-  m_Name: Room.01
+  m_Name: the bedroom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -245,7 +245,7 @@ GameObject:
   - component: {fileID: 4668207169262855509}
   - component: {fileID: 6591829562205370649}
   m_Layer: 0
-  m_Name: Room.04
+  m_Name: the sink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -732,7 +732,7 @@ GameObject:
   - component: {fileID: 1756791311090185383}
   - component: {fileID: 975139126755245358}
   m_Layer: 0
-  m_Name: Room.03
+  m_Name: the toilet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

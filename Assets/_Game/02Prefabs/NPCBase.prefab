@@ -144,6 +144,7 @@ MonoBehaviour:
   pointsOfInterest: {fileID: 4451100156383521864}
   blackboard: {fileID: 6113406819737641258}
   journal: {fileID: 798676708133143493}
+  hasSpeechBubble: {fileID: 5907796345803150044}
 --- !u!114 &5907796345803150044
 MonoBehaviour:
   m_ObjectHideFlags: 0

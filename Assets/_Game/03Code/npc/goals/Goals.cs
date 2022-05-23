@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ghostly.utils;
+using UnityEngine.Assertions;
 
 namespace ghostly.npc.goals {
 	/// Stack of things to do (<see cref="IGoal{T}"/>s).
@@ -26,6 +27,11 @@ namespace ghostly.npc.goals {
 			goal.setOwner(owner);
 			currentGoal = goal;
 			this.log($"{owner} {this}");
+		}
+
+		public void completedCurrentGoal(IGoal<NPC> completedGoal) {
+			Assert.AreEqual(currentGoal, completedGoal, $"Expected to complete current goal!");
+			currentGoal = null;
 		}
 		
 		public IGoal<NPC> popGoal() {

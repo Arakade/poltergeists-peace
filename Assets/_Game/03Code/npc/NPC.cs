@@ -23,6 +23,9 @@ namespace ghostly.npc {
 		[SerializeField]
 		public Journal journal = null!;
 		
+		[SerializeField]
+		private HasSpeechBubble hasSpeechBubble = null!;
+		
 #endregion serialized
 #region Unity callbacks
 
@@ -31,6 +34,7 @@ namespace ghostly.npc {
 			Assert.IsNotNull(blackboard);
 			Assert.IsNotNull(pointsOfInterest);
 			Assert.IsNotNull(journal);
+			Assert.IsNotNull(hasSpeechBubble);
 			
 			xfrm = transform;
 			stateEngine = new StateEngine<NPC>(this, new StateEngine<NPC>.IState[] {
@@ -60,8 +64,15 @@ namespace ghostly.npc {
 		public StateEngine<NPC> stateEngine { get; private set; } = null!;
 		
 		public Vector2? currentDestination;
+		
+		public void recordThought(IGoal<NPC> goal) {
+			this.log($"Decided to {goal}");
+			journal.record($"Decided to {goal}");
+			hasSpeechBubble.speechBubble.setText($"Think I'll {goal}");
+		}
 
-		public void onGoalComplete() {
+		public void onGoalComplete(IGoal<NPC> completedGoal) {
+			goals.completedCurrentGoal(completedGoal);
 			chooseNextAction();
 		}
 
@@ -81,9 +92,8 @@ namespace ghostly.npc {
 			
 			// Default goal -- go to a random POI for this NPC
 			var (destination, destinationName) = pointsOfInterest.getRandomDestination();
-			this.log($"{this} has no goals in life so visiting a place of interest: {destinationName}");
-			journal.record($"Decided to visit {destinationName}");
 			var visitLocationForABit = new VisitLocationForABit(destination, destinationName);
+			recordThought(visitLocationForABit);
 			goals.pushNewCurrentGoal(visitLocationForABit);
 			visitLocationForABit.begin();
 		}

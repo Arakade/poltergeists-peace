@@ -4,7 +4,6 @@ using System;
 using ghostly.utils;
 using UnityEngine;
 using UnityEngine.Assertions;
-using Random = UnityEngine.Random;
 
 namespace ghostly.npc {
 	public sealed class PointsOfInterest : MonoBehaviour {
@@ -21,6 +20,8 @@ namespace ghostly.npc {
 				if (null == pointsOfInterest[i])
 					this.error($"{this}.{nameof(pointsOfInterest)}[{i}] is null!");
 			}
+			
+			randomGrabBag = new RandomGrabBag<WayPoint>(pointsOfInterest, autoReset:true);
 		}
 			
 
@@ -28,7 +29,7 @@ namespace ghostly.npc {
 #region public
 
 		public (Vector2, string) getRandomDestination() {
-			var destWP = pointsOfInterest[Random.Range(0, pointsOfInterest.Length)];
+			var destWP = randomGrabBag.chooseOne();
 			var pos = destWP.transform.position;
 			return (pos, destWP.name);
 		}
@@ -38,6 +39,8 @@ namespace ghostly.npc {
 
 #endregion internal
 #region private
+		
+		private RandomGrabBag<WayPoint> randomGrabBag = null!;
 
 #endregion private
 	}
