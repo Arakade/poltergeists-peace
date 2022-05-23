@@ -16,6 +16,9 @@ GameObject:
   - component: {fileID: 4105531154181307165}
   - component: {fileID: 7263413958342493325}
   - component: {fileID: 5907796345803150044}
+  - component: {fileID: 6113406819737641258}
+  - component: {fileID: 4451100156383521864}
+  - component: {fileID: 798676708133143493}
   m_Layer: 6
   m_Name: NPCBase
   m_TagString: Untagged
@@ -137,6 +140,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9657f2a7c66641c3882c6a82929e5d03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movement: {fileID: 3247277236149358381}
+  pointsOfInterest: {fileID: 4451100156383521864}
+  blackboard: {fileID: 6113406819737641258}
+  journal: {fileID: 798676708133143493}
 --- !u!114 &5907796345803150044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,6 +157,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speechBubblePrefab: {fileID: 7298578022992051153, guid: ffc626db4bec0d2488f58569dea6f446, type: 3}
+--- !u!114 &6113406819737641258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3247277236149358375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca8f2ddfb5a42c9b4eb9147519ef62b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4451100156383521864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3247277236149358375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f07298bb0c6544eeb721a954fb698d78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsOfInterest: []
+--- !u!114 &798676708133143493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3247277236149358375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7661c633e3b34a068c9781ed388aadab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entries: []
 --- !u!1 &9028274071034749094
 GameObject:
   m_ObjectHideFlags: 0

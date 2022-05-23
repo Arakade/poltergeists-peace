@@ -20,6 +20,12 @@ namespace ghostly.npc.goals {
 		
 		public abstract void begin();
 		
+		protected void goalComplete() {
+			owner.onGoalComplete();
+		}
+
+		public override string ToString() => name;
+
 		protected NPC owner = null!;
 	}
 	

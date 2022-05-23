@@ -18,12 +18,15 @@ namespace ghostly.npc {
 #region Unity callbacks
 
 		public void Awake() {
+			this.log($"{this} disabling");
+			enabled = false;
 			agent.updateRotation = false;
 			agent.updateUpAxis = false;
 		}
 
 		public void Update() {
 			if (hasArrived()) {
+				this.log($"{this} disabling");
 				enabled = false;
 				onArrived?.Invoke();
 			}
@@ -48,6 +51,7 @@ namespace ghostly.npc {
 		public float stoppingDistance => agent.stoppingDistance;
 		
 		public void goTo(Vector2 pos) {
+			this.log($"{this} enabling");
 			enabled = true;
 			agent.SetDestination(pos);
 		}
@@ -62,10 +66,10 @@ namespace ghostly.npc {
 			if (agent.pathPending)
 				return false;
 			
-			if (!agent.hasPath) {
-				this.warn($"{this} has no path");
-				return true;
-			}
+			// if (!agent.hasPath) {
+			// 	this.warn($"{this} has no path");
+			// 	return true;
+			// }
 			
 			return agent.remainingDistance <= stoppingDistance;
 		}

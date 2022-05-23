@@ -33,7 +33,7 @@ namespace ghostly.npc.states {
 			
 			// Might get invoked by something else moving us so this checks whether we're really close enough to where we want to go
 			if (movement.stoppingDistance >= owner.distanceTo(owner.currentDestination!.Value)) {
-				engine.changeState(nameof(ArrivedAtCurrentDestination));
+				engine.changeState(nameof(Idle));
 			} else {
 				this.log($"Not arrived -- too far away");
 			}
